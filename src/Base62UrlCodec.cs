@@ -18,6 +18,12 @@ public class Base62Codec : ICodec
 
     public bool TryDecode(string encodedId, out ulong id)
     {
+        id = default;
+        if (string.IsNullOrEmpty(encodedId))
+        {
+            return false;
+        }
+
         return ulong.TryParse(this.codec.Decode(encodedId), out id);
     }
 }

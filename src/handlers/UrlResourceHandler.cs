@@ -30,7 +30,7 @@ public class UrlResourceHandler : ResourceHandlerBase
             HttpStatusCode.OK,
             new UrlEntityResponse(
                 this.codec,
-                new Uri("http://www.localhost:8080"),
+                new Uri("http://localhost:8080"),
                 entity));
     }
 

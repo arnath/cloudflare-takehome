@@ -10,6 +10,10 @@ public class UrlEntityResponse
         this.OriginalUrl = entity.Url;
         this.ShortenedUrl = new Uri(baseUrl, codec.Encode(this.Id));
         this.ExpiresAt = entity.ExpiresAt;
+        this.Usage = new UsageCounterResponse(
+            entity.UsageCounter.LastDay,
+            entity.UsageCounter.LastWeek,
+            entity.UsageCounter.AllTime);
     }
 
     public ulong Id { get; }
@@ -19,4 +23,8 @@ public class UrlEntityResponse
     public Uri ShortenedUrl { get; }
 
     public DateTime? ExpiresAt { get; }
+
+    public UsageCounterResponse Usage { get; }
 }
+
+public record class UsageCounterResponse(ulong LastDay, ulong LastWeek, ulong AllTime);
