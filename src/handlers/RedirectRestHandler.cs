@@ -38,7 +38,7 @@ public class RedirectRestHandler : RestHandlerBase
         entity.UsageCounter!.Increment();
 
         SydneyResponse response = new SydneyResponse(HttpStatusCode.Found);
-        response.Headers.Add("location", entity.Url!.ToString());
+        response.Headers.Add("Location", entity.Url!.ToString());
 
         return response;
     }
