@@ -17,7 +17,7 @@ public class Program
                 LoggerFactory.Create(
                     (builder) => builder.AddConsole());
 
-        IUrlRepository urlRepository = new InMemoryUrlRepository();
+        IUrlRepository urlRepository = InitializeRepository();
         ICodec codec = new Base62Codec();
         
         using (SydneyService service = new SydneyService(config, loggerFactory))
@@ -31,5 +31,14 @@ public class Program
 
             await service.StartAsync();
         }
+    }
+
+    private static IUrlRepository InitializeRepository()
+    {
+        SqliteUrlRepository urlRepository = new SqliteUrlRepository();
+        urlRepository.Database.EnsureDeleted();
+        urlRepository.Database.EnsureCreated();
+
+        return urlRepository;
     }
 }

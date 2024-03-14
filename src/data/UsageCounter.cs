@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Cfth.Data;
 
+[Owned]
 public class UsageCounter
 {
     private static readonly TimeSpan OneDay = TimeSpan.FromDays(1);

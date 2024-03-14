@@ -11,25 +11,25 @@ public class InMemoryUrlRepository : IUrlRepository
         this.entities = new Dictionary<ulong, UrlEntity>();
     }
 
-    public Task PutAsync(UrlEntity entity)
+    public ValueTask PutAsync(UrlEntity entity)
     {
         ulong id = Interlocked.Increment(ref autoIncrementId);
         entity.Id = id;
         this.entities[id] = entity;
 
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 
-    public Task<UrlEntity?> GetAsync(ulong id)
+    public ValueTask<UrlEntity?> GetAsync(ulong id)
     {
         this.entities.TryGetValue(id, out UrlEntity? value);
-        return Task.FromResult(value);
+        return new ValueTask<UrlEntity?>(value);
     }
 
-    public Task DeleteAsync(ulong id)
+    public ValueTask DeleteAsync(ulong id)
     {
         this.entities.Remove(id);
 
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 }

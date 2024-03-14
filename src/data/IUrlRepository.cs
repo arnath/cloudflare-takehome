@@ -2,9 +2,9 @@ namespace Cfth.Data;
 
 public interface IUrlRepository
 {
-    Task PutAsync(UrlEntity entity);
+    ValueTask PutAsync(UrlEntity entity);
 
-    Task<UrlEntity?> GetAsync(ulong id);
+    ValueTask<UrlEntity?> GetAsync(ulong id);
 
-    Task DeleteAsync(ulong id);
+    ValueTask DeleteAsync(ulong id);
 }
