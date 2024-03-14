@@ -40,7 +40,6 @@ public class Program
     private static IUrlRepository InitializeRepository()
     {
         SqliteUrlRepository urlRepository = new SqliteUrlRepository();
-        urlRepository.Database.EnsureDeleted();
         urlRepository.Database.EnsureCreated();
 
         return urlRepository;
