@@ -9,17 +9,20 @@ public class UrlResourceHandler : ResourceHandlerBase
 {
     private readonly IUrlRepository urlRepository;
     private readonly ICodec codec;
+    private readonly Uri baseUrl;
 
     public UrlResourceHandler(
         ILoggerFactory loggerFactory,
         IUrlRepository urlRepository,
-        ICodec codec) : base(loggerFactory)
+        ICodec codec,
+        Uri baseUrl) : base(loggerFactory)
     {
         this.urlRepository = urlRepository;
         this.codec = codec;
+        this.baseUrl = baseUrl;
     }
 
-    public override async Task<SydneyResponse> CreateAsync(SydneyRequest request)
+    public override async Task<SydneyResponse> CreateAsync(ISydneyRequest request)
     {
         CreateUrlRequest requestBody = await request.DeserializeJsonAsync<CreateUrlRequest>();
 
@@ -30,11 +33,11 @@ public class UrlResourceHandler : ResourceHandlerBase
             HttpStatusCode.OK,
             new UrlEntityResponse(
                 this.codec,
-                new Uri("http://localhost:8080"),
+                this.baseUrl,
                 entity));
     }
 
-    public override async Task<SydneyResponse> GetAsync(SydneyRequest request)
+    public override async Task<SydneyResponse> GetAsync(ISydneyRequest request)
     {
         string urlIdString = request.PathParameters["id"];
         if (!ulong.TryParse(urlIdString, out ulong id))
@@ -52,11 +55,11 @@ public class UrlResourceHandler : ResourceHandlerBase
             HttpStatusCode.OK,
             new UrlEntityResponse(
                 this.codec,
-                new Uri("http://localhost:8080"),
+                this.baseUrl,
                 entity));
     }
 
-    public override async Task<SydneyResponse> DeleteAsync(SydneyRequest request)
+    public override async Task<SydneyResponse> DeleteAsync(ISydneyRequest request)
     {
         string urlIdString = request.PathParameters["id"];
         if (!ulong.TryParse(urlIdString, out ulong id))

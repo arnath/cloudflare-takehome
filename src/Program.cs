@@ -24,7 +24,11 @@ public class Program
         {
             service.AddResourceHandler(
                 "/urls",
-                new UrlResourceHandler(loggerFactory, urlRepository, codec));
+                new UrlResourceHandler(
+                    loggerFactory,
+                    urlRepository,
+                    codec,
+                    new Uri("http://localhost:8080")));
             service.AddRestHandler(
                 "/{encodedId}",
                 new RedirectRestHandler(loggerFactory, urlRepository, codec));

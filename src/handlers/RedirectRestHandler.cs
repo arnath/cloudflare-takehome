@@ -19,7 +19,7 @@ public class RedirectRestHandler : RestHandlerBase
         this.codec = codec;
     }
 
-    public override async Task<SydneyResponse> GetAsync(SydneyRequest request)
+    public override async Task<SydneyResponse> GetAsync(ISydneyRequest request)
     {
         string encodedId = request.PathParameters["encodedId"];
         if (!this.codec.TryDecode(encodedId, out ulong id))
@@ -35,10 +35,10 @@ public class RedirectRestHandler : RestHandlerBase
         }
 
         // Increment usage data
-        entity.UsageCounter.Increment();
+        entity.UsageCounter!.Increment();
 
         SydneyResponse response = new SydneyResponse(HttpStatusCode.Found);
-        response.Headers.Add("location", entity.Url.ToString());
+        response.Headers.Add("location", entity.Url!.ToString());
 
         return response;
     }
