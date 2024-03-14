@@ -23,7 +23,7 @@ public class UrlResourceHandler : ResourceHandlerBase
     {
         CreateUrlRequest requestBody = await request.DeserializeJsonAsync<CreateUrlRequest>();
 
-        UrlEntity entity = new UrlEntity(requestBody.Url);
+        UrlEntity entity = new UrlEntity(requestBody.Url, requestBody.ExpiresAt);
         await this.urlRepository.PutAsync(entity);
 
         return new SydneyResponse(

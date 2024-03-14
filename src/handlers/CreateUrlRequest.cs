@@ -1,3 +1,3 @@
 namespace Cfth.Handlers;
 
-public record class CreateUrlRequest(Uri Url, DateTime? Expiration = null);
+public record class CreateUrlRequest(Uri Url, DateTime? ExpiresAt = null);

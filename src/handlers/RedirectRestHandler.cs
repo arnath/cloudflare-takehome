@@ -28,8 +28,9 @@ public class RedirectRestHandler : RestHandlerBase
         }
 
         UrlEntity? entity = await this.urlRepository.GetAsync(id);
-        if (entity == null)
+        if (entity == null || entity.IsExpired)
         {
+            // Return a 404 for expired entities.
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 

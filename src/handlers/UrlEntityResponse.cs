@@ -9,11 +9,14 @@ public class UrlEntityResponse
         this.Id = entity.Id;
         this.OriginalUrl = entity.Url;
         this.ShortenedUrl = new Uri(baseUrl, codec.Encode(this.Id));
+        this.ExpiresAt = entity.ExpiresAt;
     }
 
-    public ulong Id { get; set; }
+    public ulong Id { get; }
 
-    public Uri OriginalUrl { get; set; }
+    public Uri OriginalUrl { get; }
 
-    public Uri ShortenedUrl { get; set; }
+    public Uri ShortenedUrl { get; }
+
+    public DateTime? ExpiresAt { get; }
 }

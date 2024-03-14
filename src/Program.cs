@@ -24,7 +24,7 @@ public class Program
         {
             service.AddResourceHandler(
                 "/urls",
-                new UrlResourceHandler(loggerFactory, urlRepository));
+                new UrlResourceHandler(loggerFactory, urlRepository, codec));
             service.AddRestHandler(
                 "/{encodedId}",
                 new RedirectRestHandler(loggerFactory, urlRepository, codec));
