@@ -8,12 +8,15 @@ namespace Cfth.Handlers;
 public class UrlResourceHandler : ResourceHandlerBase
 {
     private readonly IUrlRepository urlRepository;
+    private readonly ICodec codec;
 
     public UrlResourceHandler(
         ILoggerFactory loggerFactory,
-        IUrlRepository urlRepository) : base(loggerFactory)
+        IUrlRepository urlRepository,
+        ICodec codec) : base(loggerFactory)
     {
         this.urlRepository = urlRepository;
+        this.codec = codec;
     }
 
     public override async Task<SydneyResponse> CreateAsync(SydneyRequest request)
@@ -23,7 +26,12 @@ public class UrlResourceHandler : ResourceHandlerBase
         UrlEntity entity = new UrlEntity(requestBody.Url);
         await this.urlRepository.PutAsync(entity);
 
-        return new SydneyResponse(HttpStatusCode.OK, entity);
+        return new SydneyResponse(
+            HttpStatusCode.OK,
+            new UrlEntityResponse(
+                this.codec,
+                new Uri("http://www.localhost:8080"),
+                entity));
     }
 
     public override async Task<SydneyResponse> GetAsync(SydneyRequest request)
@@ -40,7 +48,12 @@ public class UrlResourceHandler : ResourceHandlerBase
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        return new SydneyResponse(HttpStatusCode.OK, entity);
+        return new SydneyResponse(
+            HttpStatusCode.OK,
+            new UrlEntityResponse(
+                this.codec,
+                new Uri("http://www.localhost:8080"),
+                entity));
     }
 
     public override async Task<SydneyResponse> DeleteAsync(SydneyRequest request)

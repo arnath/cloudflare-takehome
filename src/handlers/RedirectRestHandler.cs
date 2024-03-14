@@ -34,7 +34,7 @@ public class RedirectRestHandler : RestHandlerBase
         }
 
         SydneyResponse response = new SydneyResponse(HttpStatusCode.TemporaryRedirect);
-        response.Headers.Add("Location", entity.OriginalUrl.ToString());
+        response.Headers.Add("Location", entity.Url.ToString());
 
         return response;
     }

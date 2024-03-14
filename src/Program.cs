@@ -1,9 +1,35 @@
-﻿namespace Cfth;
+﻿using Cfth.Data;
+using Cfth.Handlers;
+using Microsoft.Extensions.Logging;
+using Sydney.Core;
 
-class Program
+namespace Cfth;
+
+public class Program
 {
-    static void Main(string[] args)
+    public static async Task Main()
     {
-        Console.WriteLine("Hello, World!");
+        SydneyServiceConfig config = new SydneyServiceConfig(
+            8080,
+            returnExceptionMessagesInResponse: true);
+        
+        ILoggerFactory loggerFactory =
+                LoggerFactory.Create(
+                    (builder) => builder.AddConsole());
+
+        IUrlRepository urlRepository = new InMemoryUrlRepository();
+        ICodec codec = new Base62Codec();
+        
+        using (SydneyService service = new SydneyService(config, loggerFactory))
+        {
+            service.AddResourceHandler(
+                "/urls",
+                new UrlResourceHandler(loggerFactory, urlRepository));
+            service.AddRestHandler(
+                "/{encodedId}",
+                new RedirectRestHandler(loggerFactory, urlRepository, codec));
+
+            await service.StartAsync();
+        }
     }
 }

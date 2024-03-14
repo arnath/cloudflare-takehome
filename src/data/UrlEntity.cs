@@ -1,16 +1,13 @@
-using System.Text.Json.Serialization;
-using Base62;
-
 namespace Cfth.Data;
 
 public class UrlEntity
 {
-    public UrlEntity(Uri originalUrl)
+    public UrlEntity(Uri url)
     {
-        this.OriginalUrl = originalUrl;
+        this.Url = url;
     }
 
     public ulong Id { get; set; }
 
-    public Uri OriginalUrl { get; set; }
+    public Uri Url { get; set; }
 }
