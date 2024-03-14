@@ -22,7 +22,14 @@ public class InMemoryUrlRepository : IUrlRepository
 
     public Task<UrlEntity?> GetAsync(ulong id)
     {
-        entities.TryGetValue(id, out UrlEntity? value);
+        this.entities.TryGetValue(id, out UrlEntity? value);
         return Task.FromResult(value);
+    }
+
+    public Task DeleteAsync(ulong id)
+    {
+        this.entities.Remove(id);
+
+        return Task.CompletedTask;
     }
 }

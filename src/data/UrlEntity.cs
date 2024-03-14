@@ -10,7 +10,6 @@ public class UrlEntity
         this.OriginalUrl = originalUrl;
     }
 
-    [JsonIgnore]
     public ulong Id { get; set; }
 
     public Uri OriginalUrl { get; set; }

@@ -1,8 +1,10 @@
 namespace Cfth.Data;
 
-interface IUrlRepository
+public interface IUrlRepository
 {
     Task PutAsync(UrlEntity entity);
 
     Task<UrlEntity?> GetAsync(ulong id);
+
+    Task DeleteAsync(ulong id);
 }
