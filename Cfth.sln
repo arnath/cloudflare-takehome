@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cfth", "src/Cfth.csproj", "{043D2403-D152-4032-855F-E631C894BBCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{043D2403-D152-4032-855F-E631C894BBCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{043D2403-D152-4032-855F-E631C894BBCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{043D2403-D152-4032-855F-E631C894BBCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{043D2403-D152-4032-855F-E631C894BBCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD63E5CD-413B-485D-B474-DA02483FC95C}
+	EndGlobalSection
+EndGlobal
